@@ -46,7 +46,12 @@ ENV CATALINA_BASE=/home/openolat
 ENV CATALINA_HOME=/home/openolat/tomcat
 ENV JRE_HOME=/home/openolat/jre
 
+ENV LANG=C.UTF-8
+
 RUN mkdir -p /home/openolat/olatdata && \
     mkdir -p /home/openolat/logs
 
+COPY entrypoint.sh /home/openolat/entrypoint.sh
+
+ENTRYPOINT [ "/home/openolat/entrypoint.sh" ]
 CMD [ "/home/openolat/tomcat/bin/catalina.sh", "run" ]

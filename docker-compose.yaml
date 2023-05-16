@@ -31,11 +31,11 @@ services:
       context: openolat
       args:
         - ARG OPENOLAT_URL=$OPENOLAT_URL
-    volumes:
-      - openolat-data:/home/openolat/olatdata
-      - openolat-logs:/home/openolat/logs
+#    volumes:
+#      - openolat-data:/home/openolat/olatdata
+#      - openolat-logs:/home/openolat/logs
     restart: always
     ports:
-      - 8088:8088
+      - ${OLAT_PORT:-8088}:8088
     depends_on:
       - postgres
