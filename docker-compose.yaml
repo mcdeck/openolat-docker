@@ -1,0 +1,41 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+volumes:
+  postgres-data:
+  openolat-data:
+  openolat-logs:
+
+services:
+
+  postgres:
+    build:
+      context: postgres
+      args:
+        - ARG JDK_URL=$JDK_URL
+        - ARG TOMCAT_URL=$TOMCAT_URL
+        - ARG OPENOLAT_URL=$OPENOLAT_URL
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: oodbu
+      POSTGRES_PASSWORD: oodbpasswd
+      POSTGRES_DB: oodb
+      PGDATA: /var/lib/postgresql/data
+    expose: 
+      - 5432
+
+  openolat:
+    build: 
+      context: openolat
+      args:
+        - ARG OPENOLAT_URL=$OPENOLAT_URL
+    volumes:
+      - openolat-data:/home/openolat/olatdata
+      - openolat-logs:/home/openolat/logs
+    restart: always
+    ports:
+      - 8088:8088
+    depends_on:
+      - postgres
