@@ -46,7 +46,7 @@ services:
     image: nginx:1.23.4-alpine
     volumes: 
       # - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/templates:/etc/nginx/templates:ro
       - certbot-conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
     ports:
@@ -55,13 +55,30 @@ services:
     restart: always
     environment:
       - NGINX_HOST=${NGINX_HOST}
+      - NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
       - OLAT_PORT=${OLAT_PORT:-8088}
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.datecron.schedule: "@every 6h"
+      ofelia.job-exec.datecron.command: "nginx -s reload"      
 
   certbot:
     image: certbot/certbot      
     volumes:
       - certbot-conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
-    restart: always      
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.datecron.schedule: "@every 12h"
+      ofelia.job-exec.datecron.command: "certonly"            
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    depends_on:
+      - nginx
+      - certbot
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
