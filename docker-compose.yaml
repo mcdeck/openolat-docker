@@ -49,6 +49,8 @@ services:
       - ./nginx/templates:/etc/nginx/templates:ro
       - certbot-conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
+    depends_on:
+      - openolat
     ports:
       - "80:80"
       - "443:443"      
@@ -61,8 +63,8 @@ services:
       - OLAT_PORT=${OLAT_PORT:-8088}
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.datecron.schedule: "@every 6h"
-      ofelia.job-exec.datecron.command: "nginx -s reload"      
+      ofelia.job-exec.nginx-reload.schedule: "@every 6h"
+      ofelia.job-exec.nginx-reload.command: "nginx -s reload"      
 
   certbot:
     image: certbot/certbot      
@@ -71,8 +73,8 @@ services:
       - certbot-www:/var/www/certbot
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.datecron.schedule: "@every 12h"
-      ofelia.job-exec.datecron.command: "certonly"            
+      ofelia.job-exec.certbot.schedule: "@every 12h"
+      ofelia.job-exec.certbot.command: "certonly"            
 
   ofelia:
     image: mcuadros/ofelia:latest
