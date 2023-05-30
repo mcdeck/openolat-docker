@@ -9,9 +9,9 @@ staging=0 # Set to 1 if you're testing your setup to avoid hitting request limit
 
 echo "### Fetch nginx config ..."
 docker compose run --rm --entrypoint "\
-  mkdir -p '/etc/letsencrypt/conf' && \
+  mkdir -p '/etc/letsencrypt' && \
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > /etc/letsencrypt/options-ssl-nginx.conf && \
-  curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > /etc/letsencrypt/ssl-dhparams.pem" certbot
+  curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > /etc/letsencrypt/ssl-dhparams.pem" nginx
 echo
 
 echo "### Creating dummy certificate for $domains ..."
