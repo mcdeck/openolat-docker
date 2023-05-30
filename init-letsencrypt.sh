@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 domains=(lernen.winaba.de)
 rsa_key_size=4096
 email="oliver@van-porten.de" # Adding a valid address is strongly recommended
