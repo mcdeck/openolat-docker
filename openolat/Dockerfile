@@ -5,7 +5,7 @@ ARG TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.8/bin/apache-tomc
 ARG OPENOLAT_URL=https://www.openolat.com/fileadmin/downloads/releases/openolat_1727.war
 
 RUN apt-get -y update && \
-    apt-get -y install wget unzip busybox 
+    apt-get -y install wget unzip busybox gettext
 
 RUN useradd -m -s /bin/bash openolat
 
@@ -36,7 +36,9 @@ COPY ./conf/server.xml /home/openolat/conf/server.xml
 
 COPY ./bin/setenv.sh /home/openolat/bin/setenv.sh
 
-COPY ./lib/olat.local.properties /home/openolat/lib/olat.local.properties
+COPY ./lib/olat.local.properties /home/openolat/lib/olat.local.properties.template
+# This will be env-subst'ed in entrypotin.sh
+
 COPY ./lib/log4j2.xml /home/openolat/lib/log4j2.xml
 
 RUN mkdir -p /home/openolat/conf/Catalina/localhost/

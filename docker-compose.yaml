@@ -37,6 +37,27 @@ services:
       - openolat-data:/home/openolat/olatdata
       - openolat-logs:/home/openolat/logs
     restart: always
+    environment:
+      OLAT_db_source: ${OLAT_db_source}
+      OLAT_db_jndi: ${OLAT_db_jndi}
+      OLAT_db_vendor: ${OLAT_db_vendor}
+      OLAT_installation_dir: ${OLAT_installation_dir}
+      OLAT_log_dir: ${OLAT_log_dir}
+      OLAT_server_contextpath: ${OLAT_server_contextpath}
+      OLAT_server_domainname: ${OLAT_server_domainname}
+      OLAT_server_port: ${OLAT_server_port}
+      OLAT_server_port_ssl: ${OLAT_server_port_ssl}
+      OLAT_smtp_host: ${OLAT_smtp_host}
+      OLAT_smtp_user: ${OLAT_smtp_user}
+      OLAT_smtp_pwd: ${OLAT_smtp_pwd}
+      OLAT_smtp_port: ${OLAT_smtp_port}
+      OLAT_smtp_sslEnabled: ${OLAT_smtp_sslEnabled}
+      OLAT_smtp_from: ${OLAT_smtp_from}
+      OLAT_fromemail: ${OLAT_fromemail}
+      OLAT_adminemail: ${OLAT_adminemail}
+      OLAT_tomcat_id: ${OLAT_tomcat_id}
+      OLAT_userdata_dir: ${OLAT_userdata_dir}
+      OLAT_defaultlang: ${OLAT_defaultlang}
     ports:
       - ${OLAT_PORT:-8088}:8088
     depends_on:
@@ -61,6 +82,7 @@ services:
       - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
       - OLAT_PORT=${OLAT_PORT:-8088}
+
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.nginx-reload.schedule: "@every 6h"
