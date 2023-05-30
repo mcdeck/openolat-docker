@@ -2,20 +2,21 @@
 
 set -e
 
+envfile=.env.winaba
 domains=(lernen.winaba.de)
 rsa_key_size=4096
 email="oliver@van-porten.de" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 echo "### Fetch nginx config ..."
-docker compose run --rm --entrypoint "/bin/sh -c '\
+docker compose --env-file $envfile run --rm --entrypoint "/bin/sh -c '\
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf -o /etc/letsencrypt/options-ssl-nginx.conf; \
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem -o /etc/letsencrypt/ssl-dhparams.pem'" nginx
 echo
 
 echo "### Creating dummy certificate for $domains ..."
 path="/etc/letsencrypt/live/$domains"
-docker compose run --rm --entrypoint "\
+docker compose --env-file $envfile run --rm --entrypoint "\
   mkdir -p /etc/letsencrypt/live/$domains && \
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
@@ -24,7 +25,7 @@ docker compose run --rm --entrypoint "\
 echo
 
 echo "### Starting nginx ..."
-docker compose up --force-recreate -d nginx
+docker compose --env-file $envfile up --force-recreate -d nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."
@@ -50,7 +51,7 @@ esac
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
-docker compose run --rm --entrypoint "\
+docker compose --env-file $envfile run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
     $staging_arg \
     $email_arg \
@@ -61,4 +62,4 @@ docker compose run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker-compose exec nginx nginx -s reload
+docker compose --env-file $envfile exec nginx nginx -s reload
