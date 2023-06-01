@@ -2,11 +2,13 @@
 
 set -e
 
-envfile=.env.winaba
-domains=(lernen.winaba.de)
+envfile=${ENVFILE:-.env}
+. ${envfile}
+
+domains=$DOMAINS
 rsa_key_size=4096
 email="oliver@van-porten.de" # Adding a valid address is strongly recommended
-staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
+staging=${STAGING:-0} # Set to 1 if you're testing your setup to avoid hitting request limits
 
 echo "### Fetch nginx config ..."
 docker compose --env-file $envfile run --rm --entrypoint "/bin/sh -c '\
@@ -16,12 +18,13 @@ echo
 
 echo "### Creating dummy certificate for $domains ..."
 path="/etc/letsencrypt/live/$domains"
-docker compose --env-file $envfile run --rm --entrypoint "\
+docker compose --env-file $envfile run --rm --entrypoint "/bin/sh -c \"\ 
   mkdir -p /etc/letsencrypt/live/$domains && \
+  apk add openssl && \
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
     -out '$path/fullchain.pem' \
-    -subj '/CN=localhost'" certbot
+    -subj '/CN=localhost'\"" nginx
 echo
 
 echo "### Starting nginx ..."
@@ -29,10 +32,10 @@ docker compose --env-file $envfile up --force-recreate -d nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."
-docker compose run --rm --entrypoint "\
+docker compose run --rm --entrypoint "/bin/sh -c '\
   rm -Rf /etc/letsencrypt/live/$domains && \
   rm -Rf /etc/letsencrypt/archive/$domains && \
-  rm -Rf /etc/letsencrypt/renewal/$domains.conf" certbot
+  rm -Rf /etc/letsencrypt/renewal/$domains.conf'" certbot
 echo
 
 echo "### Requesting Let's Encrypt certificate for $domains ..."
