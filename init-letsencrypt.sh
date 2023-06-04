@@ -27,6 +27,12 @@ docker compose --env-file $envfile run --rm --entrypoint "/bin/sh -c \"\
     -subj '/CN=localhost'\"" nginx
 echo
 
+if [ ! -e $ONLY_SELF_SIGNED ] 
+then
+  echo Only making self-signed cert, exiting here...
+  exit
+fi
+
 echo "### Starting nginx ..."
 docker compose --env-file $envfile up --force-recreate -d nginx
 echo
