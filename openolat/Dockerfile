@@ -44,6 +44,9 @@ COPY ./lib/log4j2.xml /home/openolat/lib/log4j2.xml
 RUN mkdir -p /home/openolat/conf/Catalina/localhost/
 COPY ./conf/Catalina/localhost/ROOT.xml /home/openolat/conf/Catalina/localhost/
 
+# Custom Theme
+COPY --chown=openolat ./themes /home/openolat/openolat_war/static/themes/
+
 ENV CATALINA_BASE=/home/openolat
 ENV CATALINA_HOME=/home/openolat/tomcat
 ENV JRE_HOME=/home/openolat/jre

@@ -93,10 +93,12 @@ services:
     volumes:
       - certbot-conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
+    environment:
+      - domains=${DOMAINS}
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.certbot.schedule: "@every 12h"
-      ofelia.job-exec.certbot.command: "certonly"
+      ofelia.job-exec.certbot.command: "renew"
 
   ofelia:
     image: mcuadros/ofelia:latest
