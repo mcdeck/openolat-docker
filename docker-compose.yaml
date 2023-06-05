@@ -59,6 +59,7 @@ services:
       OLAT_userdata_dir: ${OLAT_userdata_dir}
       OLAT_defaultlang: ${OLAT_defaultlang}
       OLAT_layout_theme: ${OLAT_layout_theme}
+      OLAT_DEBUG: ${OLAT_DEBUG:-false}
     ports:
       - ${OLAT_PORT:-8088}:8088
     depends_on:
