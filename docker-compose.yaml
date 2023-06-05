@@ -58,6 +58,7 @@ services:
       OLAT_tomcat_id: ${OLAT_tomcat_id}
       OLAT_userdata_dir: ${OLAT_userdata_dir}
       OLAT_defaultlang: ${OLAT_defaultlang}
+      OLAT_layout_theme: ${OLAT_layout_theme}
     ports:
       - ${OLAT_PORT:-8088}:8088
     depends_on:

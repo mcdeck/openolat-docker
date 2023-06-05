@@ -1,1 +1,347 @@
-.o_email_body{font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;max-width:768px}.o_email_body .o_email_content{margin:14px 0 14px 0;padding-left:12px}.o_email_body .o_email_content h1{background-color:#126365;color:#fff;padding:20px 0 20px 12px;margin-bottom:30px;margin-left:-12px;font-size:x-large}.o_email_body .o_email_content strong{color:#126365}.o_email_body .o_email_footer{font-size:smaller;color:#aaa;border-top:5px solid #126365;padding:4px 12px;margin-top:1em}.o_email_body .o_email_footer a{color:#aaa}.o_mail_message .o_email_body{font-family:inherit}.o_email_body .o_email_button{color:#fff;background-color:#126365;border-color:#0e4e4f;border-radius:4px;padding:6px 12px;text-align:center;white-space:nowrap;vertical-align:middle;touch-action:manipulation;cursor:pointer;text-decoration:none}.o_email_body .o_email_button_group{margin-top:1em;margin-bottom:1em;text-align:center}.o_email_body .o_email_button_group a{margin-right:5px;margin-bottom:.5em;font-weight:bold}.o_email_body .o_email_button_group a:last-child{margin-right:0}.o_email_body .o_email_button_group_left{text-align:left}.o_email_body .o_email_button_group_right{text-align:right}/*# sourceMappingURL=email.css.map */
+/* Use OpenOLAT configuration to override defaults */
+/* OpenOLAT colors */
+/* $o-brand-chocolate				: rgb(71,55,41);  more brownish */
+/* General colors */
+/* Login screen */
+/* Login screen background image copyrights: 
+infinite.jpg
+Pixaby License by https://pixabay.com/photos/away-avenue-trees-nature-infinite-2414983/
+
+christian.jpg
+marco.jpg
+holger.jpg
+openolat_award.jpg
+CC by frentix GmbH http://www.frentix.com 
+*/
+/* Course site start button */
+/* Font family */
+/*
+$headings-font-family			: inherit;
+$font-size-base					: 14px;
+*/
+/* Inverted navbar 
+$o-navbar-color						: #777 ;
+$o-navbar-bg						: #222 ;
+$o-navbar-border-color				: darken($o-navbar-bg, 10%) ;
+$o-navbar-link-color				: #777 ;
+$o-navbar-link-hover-color			: #fff ;
+$o-navbar-link-hover-bg 			: transparent ;
+$o-navbar-link-active-color 		: $o-navbar-link-hover-color ;
+$o-navbar-link-active-bg 			: darken($o-navbar-bg, 10%) ;
+$o-navbar-link-disabled-color 		: #444 ;
+$o-navbar-link-disabled-bg 			: transparent ;
+$o-navbar-tools-permanent-color		: #777;
+*/
+/* Inverted footer 
+$o-footer-outer-bg 					: $o-navbar-bg;
+$o-footer-inner-bg 					: $o-navbar-bg;
+$o-footer-default-color 			: $o-navbar-link-color;
+$o-footer-default-link-color 		: $o-navbar-link-color;
+$o-footer-default-link-hover-color 	: $o-navbar-link-hover-color;
+*/
+/* Add all default config and apply styles from light theme */
+/*
+ *  =================================================
+ *  
+ *   SaSS file for OpenOLAT email styles. This is 
+ *   included in email to nicely display content. 
+ *   
+ *   @author uhensler, www.frentix.com
+ *   @date November 2018
+ *
+ *	 also read themes.README!
+ *  =================================================
+ */
+/*
+ * =================================================
+ *   
+ * OpenOLAT theme functions file
+ *
+ * @author gnaegi,  www.frentix.com
+ * @date December 2022
+ */
+/* Helper method to calculate the relative luminance required to
+ * implement proper accessiblility 
+ *
+ * Based on code from https://css-tricks.com/snippets/sass/luminance-color-function/
+ * 
+ *
+ * Returns the luminance of `$color` as a float (between 0 and 1)
+ * 1 is pure white, 0 is pure black
+ * 
+ * @param {Color} $color - Color
+ * @return {Number}
+ * @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef Reference
+ */
+/* Helper method to calculate the contrast based on the luminance
+ * For good readibility the contrast should be greater than 4.5
+ * for bold and large text it can be as low as 3 depending on the font size
+ *
+ * @param {Color1} $color1 - The first color (e.g. text color)
+ * @param {Color2} $color2 - The second color (e.g. text background)
+ * @return {Number}
+ */
+/*
+ * =================================================
+ *   
+ * OpenOLAT theme configuration file
+ *
+ * @author gnaegi,  www.frentix.com
+ * @date April 2014
+ *
+ * To create your own theme, please read themes.README!
+ * =================================================
+ * 
+ * Configure OpenOLAT and boostrap variables in this file. 
+ * All variables with the o- prefix are OpenOLAT specific variables, 
+ * the other variabels are from bootstrap. 
+ * 
+ * When you modify any variable here, make sure you run 
+ * the scrip src/main/webapp/static/themes/compiletheme.sh
+ * 
+ * See src/main/webapp/static/bootstrap/3.1.1/stylesheets/bootstrap/_variables.scss
+ * or http://getbootstrap.com/customize/#less-variables
+ * or http://getbootstrap.com/css/#less-variables
+ */
+/* ---- Bootstrap specific configurations ----
+	Add your custom font sizes and other bootstrap overrides here. 
+	Full spec here: http://getbootstrap.com/customize/
+*/
+/*
+ * =================================================
+ *   
+ * OpenOLAT theme functions file
+ *
+ * @author gnaegi,  www.frentix.com
+ * @date December 2022
+ */
+/* Helper method to calculate the relative luminance required to
+ * implement proper accessiblility 
+ *
+ * Based on code from https://css-tricks.com/snippets/sass/luminance-color-function/
+ * 
+ *
+ * Returns the luminance of `$color` as a float (between 0 and 1)
+ * 1 is pure white, 0 is pure black
+ * 
+ * @param {Color} $color - Color
+ * @return {Number}
+ * @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef Reference
+ */
+/* Helper method to calculate the contrast based on the luminance
+ * For good readibility the contrast should be greater than 4.5
+ * for bold and large text it can be as low as 3 depending on the font size
+ *
+ * @param {Color1} $color1 - The first color (e.g. text color)
+ * @param {Color2} $color2 - The second color (e.g. text background)
+ * @return {Number}
+ */
+/* bootstrap default is very white, use just a little bit more than just white */
+/* lighter than default bootstrap */
+/* a11y optimizations */
+/* 	Add standard bootstrap variables to the mix */
+/* ---- OpenOLAT specific configurations ---- */
+/* Content styles used in iFrame e-learning content and in HTML editor */
+/* Override if color contrast not high enough */
+/* Empty state in various modules */
+/* The max width the header/navbar/main/footer can possibly have. */
+/* Main content area. The outer area is left and right outside the content area (only visible in large screen).  */
+/* Page main navigation for sites, tabs and tools */
+/* inverse style
+$o-navbar-border-color				: $navbar-inverse-border ;
+$o-navbar-bg						: $navbar-inverse-bg ;
+$o-navbar-color						: $navbar-inverse-color ;
+$o-navbar-link-color				: $navbar-inverse-link-color ;
+$o-navbar-link-hover-color			: $navbar-inverse-link-hover-color ;
+$o-navbar-link-hover-bg 			: $navbar-inverse-link-hover-bg ;
+$o-navbar-link-active-color 		: $navbar-inverse-link-active-color ;
+$o-navbar-link-active-bg 			: $navbar-inverse-link-active-bg ;
+$o-navbar-link-disabled-color 		: $navbar-inverse-link-disabled-color ;
+$o-navbar-link-disabled-bg 			: $navbar-inverse-link-disabled-bg ;
+$o-navbar-tools-permanent-color		: $navbar-inverse-link-color;
+$o-navbar-toggle-border-color		: $navbar-inverse-toggle-border-color ;
+$o-navbar-toggle-hover-bg			: $navbar-inverse-toggle-hover-bg ;
+$o-navbar-toggle-icon-bar-bg		: $navbar-inverse-toggle-icon-bar-bg ;
+$o-navbar-brand-color				: $navbar-inverse-brand-color ;
+$o-navbar-brand-hover-color			: $navbar-inverse-brand-hover-color ;
+$o-navbar-brand-hover-bg			: $navbar-inverse-brand-hover-bg ;
+*/
+/* More button and dropdown menu */
+/* Right off-canvas menu, part of navbar */
+/* Page footer */
+/* Toolbar in course, editor etc */
+/* Form styles */
+/* Left side menu tree */
+/* Tabbed pane component */
+/* Icon panel component */
+/* Wizard */
+/* Auto completer input field */
+/* Chart library configuration for visualized statistics */
+/* Toggle sliders */
+/* Dirty button */
+/* Ghost button */
+/* Login page */
+/* left, center or right */
+/* image CC by Thomas Leuthard https://www.flickr.com/photos/thomasleuthard/8587724648/ */
+/* Course and catalog site */
+/* same as button default border */
+/* same as h1 default size: 36px */
+/* Repository */
+/* blue */
+/* yellow */
+/* green-light */
+/* green */
+/* brown */
+/* gray */
+/* black */
+/* Access control */
+/* Curriculum in course site */
+/* Course editor and runtime */
+/* Learning path */
+/* yellow */
+/* Curriculum */
+/* Basic rendering configuration */
+/* Default styles for each level */
+/* Level 0 specific styling */
+/* Level 1 specific rendering */
+/* Level 2 specific rendering */
+/* Level 3 specific rendering */
+/* Render all curriculum elements with courses in multi columnn layout? If no set to 1 */
+/* Element type specific styles */
+/* Type course program */
+/* Type semester as part of a course program */
+/* Type module within a semester */
+/* Type single course */
+/* Curriculum filter navigation */
+/* Asssessment */
+/* Portfolio v2 */
+/* Editor */
+/* QTI2 eAssessment */
+/* Video module */
+/* Lecture module */
+/* Chat and other floating window */
+/* Instant messaging and chat */
+/* Forum module */
+/* Evaluation forms */
+/* Quality management */
+/* Invitation */
+/* green */
+/* brown */
+/* gray */
+/* black */
+/* Portlets site */
+/* Full text search results */
+/* Message boxes */
+/* Context help buttons */
+/* Form context help, aka help text */
+/* Date component */
+/* Highscore component */
+/* Process step component */
+/* Radial progress component */
+/* Drawing (border cannot be change without modifications of the jquery plugin and hotspot interaction) */
+/* Placeholder panels */
+/* Citations */
+/* Sliders */
+/* Labels */
+/* QPool */
+/* Email */
+/* Appointments */
+/* Reminders */
+/* other configurations */
+/* danger color */
+/* Files and Folders */
+/* Contact tracing */
+/* Immunity proof */
+/* AddRemove Component */
+/* Tags */
+/* Competences */
+/* Selection Background Colors */
+/* Shared Colors */
+/* Video Colors */
+/* Educational course types */
+/* Export area */
+/* Practice */
+/* Swiper */
+/* Glossary */
+/*** General style of the email text ***/
+.o_email_body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  max-width: 768px;
+}
+.o_email_body .o_email_content {
+  margin: 14px 0 14px 0;
+  padding-left: 12px;
+}
+.o_email_body .o_email_content h1 {
+  background-color: #126365;
+  color: #fff;
+  padding: 20px 0 20px 12px;
+  margin-bottom: 30px;
+  margin-left: -12px;
+  font-size: x-large;
+}
+.o_email_body .o_email_content strong {
+  color: #126365;
+}
+.o_email_body .o_email_footer {
+  font-size: smaller;
+  color: rgb(170, 170, 170);
+  border-top: 5px solid #126365;
+  padding: 4px 12px;
+  margin-top: 1em;
+}
+.o_email_body .o_email_footer a {
+  color: rgb(170, 170, 170);
+}
+
+.o_mail_message .o_email_body {
+  font-family: inherit;
+}
+
+/*** Buttons ***/
+/* Usage:
+	...  <a class="o_email_button" href="https://www.openolat.com/">OpenOLAT</a> ...
+	... <div class="o_email_button_group o_email_button_group_left"><a class="o_email_button" href="$url">Open report</a></div> ...
+*/
+.o_email_body {
+  /* use together with o_email_button_group to have buttons left or right aligned */
+}
+.o_email_body .o_email_button {
+  color: #fff;
+  background-color: #126365;
+  border-color: #0e4e4f;
+  border-radius: 4px;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  text-decoration: none;
+}
+.o_email_body .o_email_button_group {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+.o_email_body .o_email_button_group a {
+  margin-right: 5px;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+.o_email_body .o_email_button_group a:last-child {
+  margin-right: 0;
+}
+.o_email_body .o_email_button_group_left {
+  text-align: left;
+}
+.o_email_body .o_email_button_group_right {
+  text-align: right;
+}
+
+/* Override with OpenOLAT customizations */
+/* 
+	Add your custom content styles here to override styles from light/modules/*. 
+*/
+
+/*# sourceMappingURL=email.css.map */
