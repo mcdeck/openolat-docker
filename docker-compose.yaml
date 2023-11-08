@@ -13,10 +13,6 @@ services:
   postgres:
     build:
       context: postgres
-      args:
-        - JDK_URL=$JDK_URL
-        - TOMCAT_URL=$TOMCAT_URL
-        - OPENOLAT_URL=$OPENOLAT_URL
     restart: always
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -27,12 +23,17 @@ services:
       PGDATA: /var/lib/postgresql/data
     expose: 
       - 5432
+#    ports:
+#      - 5432:5432
 
   openolat:
     build: 
       context: openolat
-      args:
-        - ARG OPENOLAT_URL=$OPENOLAT_URL
+      #args:
+        # - OPENOLAT_URL=$OPENOLAT_URL
+        #- JDK_URL=$JDK_URL
+        #- TOMCAT_URL=$TOMCAT_URL
+        #- OPENOLAT_URL=$OPENOLAT_URL
     volumes:
       - openolat-data:/home/openolat/olatdata
       - openolat-logs:/home/openolat/logs
@@ -84,7 +85,6 @@ services:
       - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
       - OLAT_PORT=${OLAT_PORT:-8088}
-
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.nginx-reload.schedule: "@every 6h"
@@ -97,10 +97,11 @@ services:
       - certbot-www:/var/www/certbot
     environment:
       - domains=${DOMAINS}
+    command: [ 'renew' ]
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.certbot.schedule: "@every 12h"
-      ofelia.job-exec.certbot.command: "renew"
+      ofelia.job-exec.certbot-renew.schedule: "@every 12h"
+      ofelia.job-exec.certbot-renew.command: "renew"
 
   ofelia:
     image: mcuadros/ofelia:latest

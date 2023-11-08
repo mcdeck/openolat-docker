@@ -1,7 +1,7 @@
 FROM ubuntu:23.04
 
 ARG JDK_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.7%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.7_7.tar.gz
-ARG TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.8/bin/apache-tomcat-10.1.8.tar.gz
+ARG TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.15/bin/apache-tomcat-10.1.15.tar.gz
 ARG OPENOLAT_URL=https://www.openolat.com/fileadmin/downloads/releases/openolat_1727.war
 
 RUN apt-get -y update && \
